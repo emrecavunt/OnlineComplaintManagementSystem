@@ -9,12 +9,14 @@ Connection to MySQL with entity framework 6.0 , mysql
 
 ## Features
 * Autocomplete dropdown Helper
-* jqGrid implemented 
+* jqGrid server-side datatables included 
 * datatables with search and export files functionality
 * Gridmvc 
 * sweetalert , bootboxjs, notifyjs included
 * Google Captcha 
-*
+* GridMvc 
+* PagedList
+* Job Scheduler
 
 ## Issues 
 There could be issues with session cache and other configuration types, please let me know if you faced.
