@@ -1,0 +1,95 @@
+﻿@model EastMedRepo.Models.ItemVM
+@using EastMedRepo.Models
+@{
+    ViewBag.Title = "Add Item";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+
+    <h5 class="coloremu">
+        <i class="ace-icon fa fa-map-marker"></i>
+        @ViewBag.Title to Location
+    </h5>
+    
+
+</div>
+
+
+@if (TempData["info"] != null)
+            {
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-lg-10">
+            <div class="alert alert-danger">
+                <button class="close" data-dismiss="alert">
+                    <i class="ace-icon fa fa-times"></i>
+
+                </button>
+                <strong><i class="ace-icon fa fa-check"></i></strong>
+                @TempData["info"]
+            </div>
+            <hr />
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm())
+            {
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.LocationID)
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8 col-xs-12 col-lg-8">
+            <div class="space"></div>
+            <h4 class="header blue bolder smaller">Add Item To Location || <a href="@Url.Action("AddNewItem","Location")">Add New Item Name</a></h4> 
+            @Html.HiddenFor( x => x.LocationID)
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.itemtype, htmlAttributes: new { @class = "control-label col-md-3 col-xs-4" })
+                    <div class="col-md-4 col-xs-4 col-lg-4 col-sm-9">
+                        <div class="pos-rel">                           
+                         
+                            @Html.DropDownListFor(model => model.FK_ITEMTYPE_ID , ViewBag.ITEMTYPE as SelectList, htmlAttributes : new { @class="form-control col-xs-10 col-sm-5 col-md-6" })
+                            @Html.ValidationMessageFor(model => model.itemtype, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ItemName, htmlAttributes: new { @class = "control-label col-md-3 col-xs-4" })
+                    <div class="col-md-4 col-xs-4 col-lg-4">
+                        @Html.DropDownListFor(model => model.ItemName, ViewBag.ITEM as SelectList, htmlAttributes: new { @class = "form-control col-xs-10 col-sm-5 col-md-6" } )
+                
+                        @Html.ValidationMessageFor(model => model.ItemName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ItemQuantity, htmlAttributes: new { @class = "control-label col-md-3 col-xs-4" })
+                    <div class="col-md-4 col-xs-4 col-lg-4">
+                        @Html.EditorFor(model => model.ItemQuantity, new { htmlAttributes = new { @class = "form-control col-xs-10 col-sm-5 col-md-6" } })
+                        @Html.ValidationMessageFor(model => model.ItemQuantity, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index","Location")
+</div>
+@section PagePluginScripts {
+
+    <script src="~/assets/js/select2.min.js"></script>
+    <script src="~/assets/js/jquery-typeahead.js"></script>
+
+}

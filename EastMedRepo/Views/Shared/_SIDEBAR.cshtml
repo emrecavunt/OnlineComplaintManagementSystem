@@ -1,0 +1,326 @@
+﻿
+@using EastMedRepo.Helpers;
+<div id="sidebar" class="sidebar   sidebar-fixed  responsive  ">
+   
+    <script type="text/javascript">
+					try{ace.settings.loadState('sidebar')}catch(e){}
+    </script>
+    <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+        <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+            <span class="bigger-120">
+                <span class="coloremu bolder">Eastmed CTMS</span>
+            </span>
+        </div>
+
+       
+    </div><!-- /.sidebar-shortcuts -->
+
+    <ul class="nav nav-list">
+        <li class="@Html.ActivePage("Home","Index")" >
+            <a href="@Url.Action("Index","Home")" class="@Html.ActivePage("Home","Index")">
+                <i class="menu-icon fa fa-home coloremu"></i>
+                <span class="menu-text"> Home </span>
+            </a>
+
+            <b class="arrow"></b>
+        </li>
+       
+        
+        <!---Statistic END -->
+   
+   <!-- Admin Menu Start -->
+    @if (Convert.ToInt32(this.Session["RoleID"]) == 5)
+    {
+
+        <li class="@Html.ActivePage("Dashboard","Index")">
+            <a href="@Url.Action("Index","Dashboard")" class="@Html.ActivePage("Dashboard","Index")">
+                <i class="menu-icon fa fa-tachometer coloremu"></i>
+                <span class="menu-text"> Dashboard </span>
+            </a>
+
+            <b class="arrow"></b>
+        </li>
+         <!-- User Management START-->
+        <li class="@Html.ActivePage("User","Index") @Html.ActivePage("User","Add")">
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-user coloremu"></i>
+                <span class="menu-text"> User Management </span>
+
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+                <li class="@Html.ActivePage("User","Index")">
+                    <a href="@Url.Action("Index","User")" class="@Html.ActivePage("User","Index")">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        List Users
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+                <li class="@Html.ActivePage("User","Add")">
+                    <a href="@Url.Action("Add","User")" class="@Html.ActivePage("User","Add")">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Add User
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+    <!-- USER END-->
+   
+    <!-- Location Management Start -->
+        <li class="@Html.ActivePage("Location","Index") @Html.ActivePage("Location","Create")">
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-map-marker coloremu"></i>
+                <span class="menu-text">Location Mang.</span>
+
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+                <li class="@Html.ActivePage("Location","Index")">
+                    <a href="@Url.Action("Index","Location")" class="@Html.ActivePage("Location","Index")">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                       List Location
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+                <li class="@Html.ActivePage("Location","Create")">
+                    <a href="@Url.Action("Create", "Location")" class="@Html.ActivePage("Location","Create")">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Add Location
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+               
+            </ul>
+        </li>
+    <!-- Location Management END-->
+         <!-- Category Management Start-->
+        <li class="@Html.ActivePage("categories","Index") @Html.ActivePage("categories","Create")">
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-pencil-square-o coloremu"></i>
+                <span class="menu-text">Category Mang.</span>
+
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+                <li class="@Html.ActivePage("categories","Index")">
+                    <a href="@Url.Action("Index", "categories")" class="@Html.ActivePage("categories","Index")">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        List Category
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+                <li class="@Html.ActivePage("categories","Create")">
+                    <a href="@Url.Action("Create", "categories")" class="@Html.ActivePage("categories","Create")">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Add Category
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+
+            </ul>
+        </li>
+        <!-- Complaint Management End-->
+   
+    <!-- Complaint Management Start-->
+        <li class="@Html.ActivePage("Complaint","Index") @Html.ActivePage("Complaint","Create") @Html.ActivePage("Complaint","MaintanenceComplaintView")">
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-check-square-o coloremu"></i>
+                <span class="menu-text">Complaints Mang.</span>
+
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu">                
+                <li class="@Html.ActivePage("Complaint","Index")">
+                    <a href="@Url.Action("Index", "Complaint")" class="@Html.ActivePage("Complaint","Index")">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        List Complaints
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+                
+                <li class="@Html.ActivePage("Complaint","Create")">
+                    <a href="@Url.Action("Create", "Complaint")" class="@Html.ActivePage("Complaint","Create")">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                       Add Complaint
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+               
+            </ul>
+        </li>
+        <!-- Complaint Management End-->
+    }
+    <!--Admin Menu End-->
+
+    <!--Category Admin Menu Start-->
+    @if (Convert.ToInt32(this.Session["RoleID"]) == 6)
+    {
+        <li class="@Html.ActivePage("Dashboard","Index")">
+            <a href="@Url.Action("Index","Dashboard")" class="@Html.ActivePage("Dashboard","Index")">
+                <i class="menu-icon fa fa-tachometer coloremu"></i>
+                <span class="menu-text"> Dashboard </span>
+            </a>
+
+            <b class="arrow"></b>
+          
+        </li>
+
+        <li class="@Html.ActivePage("CategoryAdmin","UserList")">
+            <a href="@Url.Action("UserList","CategoryAdmin")" class="@Html.ActivePage("CategoryAdmin", "UserList")">
+                <i class="menu-icon fa fa-user coloremu"></i>
+                <span class="menu-text"> User List </span>
+            </a>
+
+            <b class="arrow"></b>           
+        </li>
+
+        <li class="@Html.ActivePage("CategoryAdmin","LocationList")">
+            <a href="@Url.Action("LocationList","CategoryAdmin")" class="@Html.ActivePage("CategoryAdmin", "LocationList")">
+                <i class="menu-icon fa fa-map-marker coloremu"></i>
+                <span class="menu-text"> LocationList </span>
+            </a>
+
+            <b class="arrow"></b>
+        </li>
+
+        <li class="@Html.ActivePage("CategoryAdmin","Categories")">
+            <a href="@Url.Action("Categories","CategoryAdmin")" class="@Html.ActivePage("CategoryAdmin", "Categories")">
+                <i class="menu-icon fa fa-pencil-square-o coloremu"></i>
+                <span class="menu-text"> Category List </span>
+            </a>
+
+            <b class="arrow"></b>
+        </li>
+
+        <li class="@Html.ActivePage("CategoryAdmin","ComplaintList")">
+            <a href="#" class="@Html.ActivePage("CategoryAdmin", "ComplaintList")">
+                <i class="menu-icon fa fa-check-square-o coloremut"></i>
+                <span class="menu-text"> Complaint List </span>
+            </a>
+
+            <b class="arrow"></b>
+            <ul class="submenu">
+
+                <li class="@Html.ActivePage("Complaint","Create")">
+                    <a href="@Url.Action("Create", "Complaint")" class="@Html.ActivePage("Complaint","Create")">
+                        <i class="menu-icon fa fa-check-square-o coloremu"></i>
+                        Add Complaint
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+                </ul>
+</li>
+       
+
+    }
+        <!--Category Admin Menu End-->
+
+    <!-- Maintanence Menu Start -->
+    @if (Convert.ToInt32(this.Session["RoleID"]) == 7)
+{
+    <li class="@Html.ActivePage("MaintanenceComplaint","Index")">
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-check-square-o coloremu"></i>
+                <span class="menu-text">Complaints Mang.</span>
+
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+               
+                <li class="@Html.ActivePage("MaintanenceComplaint","Index")">
+                    <a href="@Url.Action("Index", "MaintanenceComplaint")" class="@Html.ActivePage("MaintanenceComplaint","Index")">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        List Complaints
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+               
+            </ul>
+        </li>
+}
+        <!-- Maintanence Menu End -->
+
+    <!--Complainant Menu Start -->
+   @if (Convert.ToInt32(this.Session["RoleID"]) == 8)
+   {
+    <li class="@Html.ActivePage("ComplainantUser","Index") @Html.ActivePage("Complaint","Create") ">
+        <a href="#" class="dropdown-toggle">
+            <i class="menu-icon fa fa-check-square-o coloremu"></i>
+            <span class="menu-text">Complaints Mang.</span>
+
+            <b class="arrow fa fa-angle-down"></b>
+        </a>
+
+        <b class="arrow"></b>
+
+        <ul class="submenu">
+
+            <li class="@Html.ActivePage("ComplainantUser","Index")">
+                <a href="@Url.Action("Index", "ComplainantUser")" class="@Html.ActivePage("ComplainantUser","Index")">
+                    <i class="menu-icon fa fa-caret-right"></i>
+                    List Complaints
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
+            <li class="@Html.ActivePage("Complaint","Create")">
+                    <a href="@Url.Action("Create", "Complaint")" class="@Html.ActivePage("Complaint","Create")">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                       Add Complaint
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+
+        </ul>
+    </li>
+   }
+        <!--Complainant Menu End -->
+    </ul><!-- /.nav-list -->
+
+    <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+        <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+
+        
+      
+
+    </script>
+    }

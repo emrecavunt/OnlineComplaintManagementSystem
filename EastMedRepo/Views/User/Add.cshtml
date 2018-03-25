@@ -1,0 +1,338 @@
+﻿@model EastMedRepo.Models.UserVM
+@{
+    ViewBag.Title = "Add User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+            <div class="page-header">
+                <h1>
+                    @ViewBag.Title
+                    <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        Add a new User
+                    </small>
+                </h1>
+            </div>
+<div id="right-menu" class="modal aside" data-body-scroll="false" data-offset="true" data-placement="right" data-fixed="true" data-backdrop="false" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">&times;</span>
+                    </button>
+                    Help Desk For User Management
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <h3 class="lighter">How to Add a User</h3>
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                <strong>Department :</strong>  Choose a department First 
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                List of Rooms in that department will appear after you choose a department.
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                Choose a Room from that list of rooms.
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                <strong>Role :</strong>  Choose a Role to user e.g Complainant
+                <br />                
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+               Make Sure that University Id Max.45. Min. 9 Length
+                Contains Eg:<small class="text-warning">OG20080234</small>
+
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                Make sure that Password match with Compare Password !
+                <br />
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                Make sure the E-Mail does not have any Turkish Letters!
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+              
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                2
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                3
+            </div>
+        </div><!-- /.modal-content -->
+
+        <button class="aside-trigger btn btn-info btn-app btn-xs ace-settings-btn" data-target="#right-menu" data-toggle="modal" type="button">
+            <i data-icon1="fa-plus" data-icon2="fa-minus" class="ace-icon fa fa-plus bigger-110 icon-only"></i>
+        </button>
+    </div><!-- /.modal-dialog -->
+</div>
+          @if (TempData["info"] != null)
+          {
+            <div class="row">
+                <div class="col-md-10 col-xs-10 col-lg-10">
+                    <div class="alert alert-danger">
+                        <button class="close" data-dismiss="alert">
+                            <i class="ace-icon fa fa-times"></i>
+
+                        </button>
+                        <strong><i class="ace-icon fa fa-check"></i></strong>
+                        @TempData["info"]
+                    </div>
+                    <hr />
+                </div>
+            </div>
+          }
+            @using (Html.BeginForm("Add", "User", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data", id ="UserForm" }))
+            {
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-8 col-xs-12 col-lg-8">
+                       
+                                    <fieldset>
+                                        @Html.AntiForgeryToken()
+                                         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                                       
+                                        <div class="space"></div>
+                                        <h4 class="header blue bolder smaller">About User</h4>
+                                        <div class="form-group">
+                                            
+                                            @Html.LabelFor(model => model.UNI_ID, "University ID", htmlAttributes: new { @class = "control-label col-md-3 col-xs-10" })                                           
+                                            <div class="col-md-4 col-xs-10 col-lg-4 ">
+                                                @Html.TextBoxFor(x => x.UNI_ID, new { @class = "col-xs-10 col-sm-5 col-md-8 form-control ", placeholder = "e.g:OG20080234", required = "required" })
+                                                @Html.ValidationMessageFor(model => model.UNI_ID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="space-4"></div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.FIRST_NAME, "First Name", htmlAttributes: new { @class = "control-label col-md-3 col-xs-10" })
+                                            <div class="col-md-4 col-xs-10 col-lg-4">
+                                                @Html.TextBoxFor(x => x.FIRST_NAME, new { @class = "col-xs-10 col-sm-5 form-control",  placeholder = "First Name" , required = "required" })
+                                                @Html.ValidationMessageFor(x => x.FIRST_NAME, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="space-4"></div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.LAST_NAME, "Last Name", htmlAttributes: new { @class = "control-label col-md-3 col-xs-10" })
+                                            <div class="col-md-4 col-xs-10 col-lg-4">
+                                                @Html.TextBoxFor(x => x.LAST_NAME, new { @class = "col-xs-10 col-sm-5 form-control", placeholder = "Last Name" , required = "required" })
+                                                @Html.ValidationMessageFor(x => x.LAST_NAME, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="space-4"></div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.PASSWORD, "Password", htmlAttributes: new { @class = "control-label col-md-3 col-xs-10" })
+                                            <div class="col-md-4 col-xs-10 col-lg-4">
+                                                @Html.PasswordFor(x => x.PASSWORD, new { @class = "col-xs-10 col-sm-5 col-md-4 form-control",  placeholder = "Password" , required = "required" })
+                                                @Html.ValidationMessageFor(x => x.PASSWORD, "", new { @class = "text-danger" })
+                                            </div>                                           
+                                            <div class="col-sm-3 col-xs-3 col-md-4 col-lg-4">
+                                                <input type="button" class="btn btn-white btn-yellow btn-sm" name="set_Value" id="set_Value" value="Auto Generate" onclick="setValue()" />                                              
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.ComparePassword, "Confirm Password", htmlAttributes: new { @class = "control-label col-md-3 col-xs-10" })
+                                            <div class="col-md-4 col-xs-10 col-lg-4">
+                                                @Html.PasswordFor(x => x.ComparePassword, new { @class = "col-xs-10 col-sm-5 col-md-4 form-control", placeholder = "ConfirmPassword" })
+                                                @Html.ValidationMessageFor(x => x.ComparePassword, "", new { @class = "text-danger" })
+                                            </div>                                          
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div>
+                                                @Html.LabelFor(model => model.FK_PRIVILEGE_ID, "Role", htmlAttributes: new { @class = "control-label col-md-3 col-xs-10" })
+                                                <div class="col-md-4 col-xs-10 col-lg-4">
+                                                    @Html.DropDownListFor(model => model.FK_PRIVILEGE_ID, new SelectList(ViewBag.Role, "ID", "ROLE"), ("Chose"), new { @class = "chosen-select form-control", id = "FK_PRIVILEGE_ID" , required = "required" })                                                  
+                                                     @Html.ValidationMessageFor(model => model.FK_PRIVILEGE_ID, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="space-4"></div>
+                                        <h4 class="header blue bolder smaller">Contact info</h4>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.TITLE, "Title", htmlAttributes: new { @class = "control-label col-md-3 col-xs-10" })
+                                            <div class="col-md-4 col-xs-10 col-lg-4">
+                                                @Html.TextBoxFor(x => x.TITLE, new { @class = "col-xs-10 col-sm-5 form-control",  placeholder = "Title" })
+                                                @Html.ValidationMessageFor(x => x.TITLE, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="space-4"></div>
+                                        <div class="form-group">
+                                           
+                                            @Html.LabelFor(model => model.PHONE, "Phone", htmlAttributes: new { @class = "control-label col-md-3 col-xs-10" })
+                                            <div class="col-md-4 col-xs-10 col-lg-4">
+                                                @Html.TextBoxFor(x => x.PHONE, new { @class = "form-control col-xs-10 col-sm-5 ",  placeholder = "e.g:(999) 999-9999" })
+                                                @Html.ValidationMessageFor(x => x.PHONE, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="space-4"></div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.EMAIL, "E-Mail", htmlAttributes: new { @class = "control-label col-md-3 col-xs-10" })
+                                            <div class="col-md-4 col-xs-10 col-lg-4">
+                                                @Html.TextBoxFor(x => x.EMAIL, new { @class = "col-xs-10 col-sm-5 form-control",  placeholder = "E-mail" , required = "required" })
+                                                @Html.ValidationMessageFor(x => x.EMAIL, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="space-4"></div>
+                                        <h4 class="header blue bolder smaller">Location</h4>
+                                        <div class="form-group">
+                                            <div>
+                                                @Html.LabelFor(model => model.location.departmant.DEPT_NAME, "Departmant Name", htmlAttributes: new { @class = "control-label col-md-3 col-xs-10" })
+                                                <div class="col-md-4 col-xs-10 col-lg-4">
+                                                  
+                                                    @if (ViewBag.DepartmentList != null)
+                                                    {
+
+
+                                                        @Html.DropDownListFor(m => m.DepartmentID, ViewBag.DepartmentList as SelectList, "--Select Department--", new { @class = "form-control" , required = "required" })
+
+                                                    }
+
+                                                    @Html.ValidationMessageFor(x => x.DepartmentID, "", new { @class = "text-danger" })
+                                                 </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="space-4"></div>
+                                        <div class="form-group">
+                                            <div>
+                                                @Html.LabelFor(model => model.FK_LOCATION_ID, "Room ID", htmlAttributes: new { @class = "control-label col-md-3 col-xs-10" })
+                                                <div class="col-md-4 col-xs-10 col-lg-4">
+                                                    @Html.DropDownListFor(m => m.LocationID, new SelectList(""), "--Select Location--", new { @class = "form-control", id = "LocationID", required = "required" })
+                                                    @Html.ValidationMessageFor(model => model.LocationID, "", new { @class = "text-danger" })
+                                                    <span id="states-loading-progress" style="display: none;">Please wait..</span>
+                                                </div>
+                                            </div>
+                                        </div>                                      
+                                        <div class="space-4"></div>
+                                        <div class="form-group">                                            
+                                                @Html.LabelFor(model => model.IsActive, "Is Active", htmlAttributes: new { @class = "control-label col-md-3 col-xs-4" })
+                                            <div class="col-md-4 col-xs-10 col-lg-4">
+                                                <label class="inline">                                                   
+                                                        @Html.CheckBoxFor(x => x.IsActive, new { @checked = "checked", @class = "lbl", @type = "checkbox" })                                                   
+                                                </label>
+                                                </div>
+                                         
+                                            </div>
+                                        <hr />
+                                        <div class="clearfix form-actions">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <button class="btn btn-info" type="submit" id="AddUser">
+                                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                                    Save
+                                                </button>
+
+                                                &nbsp; &nbsp; &nbsp;
+                                                <button class="btn" type="reset">
+                                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                                    Reset
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </fieldset>
+                                </div>
+                          
+                </div>
+            }
+
+
+       
+@section scripts {
+@Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">       
+        function setValue() {
+            var password = document.getElementById("UNI_ID").value;           
+            document.getElementById('PASSWORD').value = password;
+            document.getElementById('ComparePassword').value = password;
+        }
+        //User adding form to show error or success message from Json action User/Add
+        $(document).ready(function () {
+            $(document).on("click", "#AddUser", function () {
+                $('#UserForm').ajaxForm({
+                    success: function (response) {
+                        if (response.Success) {
+                            bootbox.alert(response.Message, function () {                                
+                                location.reload();
+                            });
+
+                        }
+                        else {
+                            bootbox.alert(response.Message, function () {                               
+                            });
+                        }
+                    }
+                })
+            })
+        })       
+    </script>
+   <script type="text/javascript">        
+       $(document).ready(function () {
+           $("#DepartmentID").change(function () {
+               var departmentID = $(this).val();
+
+               $.ajax({
+                   type: "Post",
+                   url: "/User/GetLocationList?DepartmentID=" + departmentID,
+                   contentType: "html",
+                   success: function (response) {
+
+                       $("#LocationID").empty();
+                       $("#LocationID").append(response);
+                   }
+               })
+           })
+       });
+       jQuery(function ($) {
+           $('.modal.aside').ace_aside();
+
+           $('#aside-inside-modal').addClass('aside').ace_aside({ container: '#my-modal > .modal-dialog' });
+
+           //$('#top-menu').modal('show')
+
+           $(document).one('ajaxloadstart.page', function (e) {
+               //in ajax mode, remove before leaving page
+               $('.modal.aside').remove();
+               $(window).off('.aside')
+           });
+       });
+    
+    </script>
+}

@@ -1,0 +1,30 @@
+﻿
+@model List<EastMedRepo.Models.LocationItemVM>
+@{
+    ViewBag.Title = "Locations";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="page-content">
+    <div class="page-header">
+        
+            Create location
+            
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                @foreach (var item in Model)
+                {
+                    
+                    <br />
+                           
+                    <hr />
+                            <br />                    <hr />
+                            @item.ITEM_NAME
+                            <br />                    <hr />
+                            @item.ITEMQUANTITY
+                }
+           
+        
+    </div>
+</div>
+

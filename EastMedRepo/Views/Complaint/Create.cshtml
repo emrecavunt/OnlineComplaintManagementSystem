@@ -1,0 +1,372 @@
+﻿@model EastMed.Data.Model.complaint
+
+@{
+    ViewBag.Title = "Add new Complaint";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            Add a new Complaint
+            @TempData["Info"]
+        </small>
+    </h1>
+</div>
+<div id="right-menu" class="modal aside" data-body-scroll="false" data-offset="true" data-placement="right" data-fixed="true" data-backdrop="false" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">&times;</span>
+                    </button>
+                    Help Desk For Adding a New Complaint
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <h3 class="lighter">How to Add a Complaint</h3>
+
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                <strong>Department :</strong>  Choose a department to complaint about.
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                List of Rooms in that department will appear after you choose a department.
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                Choose a Room from that list of rooms.
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                List of ITEMs in that Room will appear after you choose a Room.
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                Choose a Type of complaint about
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                <span class="red"> Hint:</span>  <strong> <u>System category</u> </strong>is related e.g: Computers, Projectors, Printers, Internet Connection issues etc.
+                <strong> <u>Technical Category</u></strong>is related e.g: Table, Chairs, Airconditioners, Boards issues etc.
+                <br />
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                ITEM ID  :
+                Either of you can add the ID of the item if its written on item in that room (Check the computers Screen or computer cabinets to see ID, Other items ID can be found on the corners)
+                or you can take a picture clearly to show which item you want to complaint about and how the issues look like.
+
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                You can click and take a picture from your phone if you enter from a mobile phone
+                Or if you want you can select from your computer to add a picture.
+                <br />
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                You can write a comment or you can live a blank, But we prefer to you to add a comment to your complaints , so we can understand and prepare for your issues to
+                fix your problems as soon as quickly.
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                1
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                2
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                3
+            </div>
+        </div><!-- /.modal-content -->
+
+        <button class="aside-trigger btn btn-info btn-app btn-xs ace-settings-btn" data-target="#right-menu" data-toggle="modal" type="button">
+            <i data-icon1="fa-plus" data-icon2="fa-minus" class="ace-icon fa fa-plus bigger-110 icon-only"></i>
+        </button>
+    </div><!-- /.modal-dialog -->
+</div>
+
+<div id="user-profile-3" class="user-profile row">
+    <div class="col-sm-offset-1 col-sm-10">
+        <div class="well well-sm">
+
+            <div class="inline middle blue bigger-110"> Add a new complaint in a seconds!  </div>
+
+        </div><!-- /.well -->
+
+        <div class="tabbable">
+
+            <h4 class="header blue bolder smaller"> Location</h4>
+
+            <form class="form-horizontal message-form">
+                <div class="form-group ">
+
+                    <label class="col-sm-3 col-md-offset-1 control-label no-padding-right">Department</label>
+
+                    <div class="col-sm-6 col-xs-9  col-md-3">
+                        @if (ViewBag.DepartmentList != null)
+                        {
+
+
+                            @Html.DropDownListFor(m => m.location.FK_DEPT_ID, ViewBag.DepartmentList as SelectList, "--Select Department--", new { @class = "form-control" })
+
+                        }
+                    </div>
+                </div>
+            </form>
+            @using (Html.BeginForm("Create", "Complaint", FormMethod.Post, new { @class = "form-horizontal message-form", enctype = "multipart/form-data", id = "ComplaintAddform" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label class="col-sm-3 col-md-offset-1 control-label no-padding-right">Room</label>
+
+                    <div class="col-sm-6 col-xs-9 col-md-3">
+                        @Html.DropDownListFor(m => m.FK_Location_ID, new SelectList(""), "--Select Location--", new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(model => model.FK_Location_ID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="space"></div>
+                <h4 class="header blue bolder smaller"> What is your Complaint about</h4>
+                <div class="form-group">
+                    <label class="col-sm-3  col-md-offset-1 control-label no-padding-right">Type of Complaint</label>
+                   
+                    <div class="col-sm-6 col-xs-9 col-md-3">
+                        @Html.DropDownListFor(model => model.FK_CATEGORY_ID, new SelectList(ViewBag.Category, "ID", "CATEGORY_NAME"), ("-Select-Category-"), new { @class = "form-control ", id = "FK_CATEGORY_ID", required = "required" })
+                        @Html.ValidationMessageFor(model => model.FK_CATEGORY_ID, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3  col-md-offset-1 control-label no-padding-right">Item Name</label>
+                    <div class="col-sm-6 col-xs-9 col-md-3">
+                        @Html.DropDownListFor(m => m.FK_ITEM_ID, new SelectList(""), "--Select Item--", new { @class = "form-control", })
+                        @Html.ValidationMessageFor(m => m.FK_ITEM_ID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="space-4"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 col-md-offset-1 control-label no-padding-right">Item ID</label>
+                    <div class="col-sm-6 col-xs-12 col-md-3">
+                        <span class="input-icon input-icon-right">
+                            @Html.EditorFor(model => model.ITEM_ID, new { htmlAttributes = new { @class = "form-control" , placeholder = "Can be Null"} })
+                            @Html.ValidationMessageFor(model => model.ITEM_ID, "", new { @class = "text-danger" })
+                            <i class="ace-icon fa fa-hashtag fa-flip-horizontal"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 col-md-offset-1 control-label no-padding-right">Item Picture</label>
+                    <div class="col-sm-9 col-xs-12 col-md-6">                              
+                                    <input type="file" id="id-input-file-2" name="ComplaintImg" accept="image/*" />                        
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 col-md-offset-1 control-label no-padding-right" for="form-field-comment">Comment</label>
+
+                    <div class="col-md-8 col-sm-9">
+                        @Html.TextAreaFor(model => model.COMMENT,5,35, new { htmlAttributes = new { @class = "form-control limited" }, maxlength="250" , id = "form-field-9"})
+                        @Html.ValidationMessageFor(model => model.COMMENT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="space"></div>
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn btn-info" id="AddComplaint">
+
+                            <i class="ace-icon fa fa-check bigger-110"></i>
+                            Save
+                        </button>
+                        &nbsp; &nbsp;
+                        <button class="btn" type="reset">
+                            <i class="ace-icon fa fa-undo bigger-110"></i>
+                            Reset
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div><!-- /.user-profile -->
+</div>
+<div class="space"></div>
+<div>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-white btn-info" })
+</div>
+@section PagePluginScripts
+    {
+    @Scripts.Render("~/bundles/jqueryval")
+<script src="~/assets/js/jquery.inputlimiter.min.js"></script>
+}
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).on("click", "#AddComplaint", function () {
+                $('#ComplaintAddform').ajaxForm({
+                    success: function (response) {
+                        if (response.Success) {
+                            bootbox.alert(response.Message, function () {
+                                location.reload();
+                            });
+
+                        }
+                        else {
+                            bootbox.alert(response.Message, function () {
+                            });
+                        }
+                    }
+                })
+            })
+        });
+        $(document).ready(function () {
+            $("#location_FK_DEPT_ID").change(function () {
+                var departmentID = $(this).val();
+
+                $.ajax({
+                    type: "Post",
+                    url: "/Complaint/GetLocationList?DepartmentID=" + departmentID,
+                    contentType: "html",
+                    success: function (response) {
+
+                        $("#FK_Location_ID").empty();
+                        $("#FK_Location_ID").append(response);
+                    }
+                })
+            })
+        });
+        $(document).ready(function () {
+            $("#FK_Location_ID").change(function () {
+                var locationID = $(this).val();
+
+                $.ajax({
+                    type: "Post",
+                    url: "/Complaint/GetItemList?locationID=" + locationID,
+                    contentType: "html",
+                    success: function (response) {
+
+                        $("#FK_ITEM_ID").empty();
+                        $("#FK_ITEM_ID").append(response);
+                    }
+                })
+            })
+        });
+        jQuery(function ($) {
+            var form_initialized = false;
+            function initialize_form() {
+                if (form_initialized) return;
+                form_initialized = true;
+
+                //intialize wysiwyg editor
+                $('.message-form .wysiwyg-editor').ace_wysiwyg({
+                    toolbar:
+                    [
+                        'bold',
+                        'italic',
+                        'strikethrough',
+                        'underline',
+                        null,
+                        'justifyleft',
+                        'justifycenter',
+                        'justifyright',
+                        null,
+                        'createLink',
+                        'unlink',
+                        null,
+                        'undo',
+                        'redo'
+                    ]
+                }).prev().addClass('wysiwyg-style1');
+
+                //file input
+                $('.message-form input[type=file]').ace_file_input()
+                .closest('.ace-file-input')
+                .addClass('width-90 inline')
+                .wrap('<div class="form-group file-input-container"><div class="col-sm-7"></div></div>');
+
+                //Add Attachment
+                //the button to add a new file input
+                $('#id-add-attachment')
+                .on('click', function () {
+                    var file = $('<input type="file" name="attachment[]" />').appendTo('#form-attachments');
+                    file.ace_file_input();
+
+                    file.closest('.ace-file-input')
+                    .addClass('width-90 inline')
+                    .wrap('<div class="form-group file-input-container"><div class="col-sm-7"></div></div>')
+                    .parent().append('<div class="action-buttons pull-right col-xs-1">\
+							<a href="#" data-action="delete" class="middle">\
+								<i class="ace-icon fa fa-trash-o red bigger-130 middle"></i>\
+							</a>\
+						</div>')
+                    .find('a[data-action=delete]').on('click', function (e) {
+                        //the button that removes the newly inserted file input
+                        e.preventDefault();
+                        $(this).closest('.file-input-container').hide(300, function () { $(this).remove() });
+                    });
+                });
+            }//initialize_form
+
+            $('[data-rel=tooltip]').tooltip({ container: 'body' });
+            $('[data-rel=popover]').popover({ container: 'body' });
+
+            $('textarea.limited').inputlimiter({
+                remText: '%n character%s remaining...',
+                limitText: 'max allowed : %n.'
+            });
+
+          
+            $('#id-input-file-1 , #id-input-file-2').ace_file_input({
+                no_file: 'No File ...',
+                btn_choose: 'Choose',
+                btn_change: 'Change',
+                droppable: false,
+                onchange: null,
+                thumbnail: false, //| true | large
+                whitelist:'gif|png|jpg|jpeg',
+                blacklist:'exe|php'
+                //onchange:''
+                
+            });
+            $('.message-form input[type=file]').ace_file_input()
+                        .closest('.ace-file-input')
+                        .addClass('width-90 inline')
+                        .wrap('<div class="form-group file-input-container"><div class="col-sm-7"></div></div>');
+        });
+    </script>
+}

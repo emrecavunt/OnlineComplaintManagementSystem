@@ -1,0 +1,279 @@
+﻿@model IEnumerable<EastMed.Data.Model.user>
+
+@{
+    ViewBag.Title = "User List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section PagePluginStyles{
+  
+}
+<!-- /.ace-settings-container -->
+<div class="page-header">
+    <h1>
+        User Management
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            User List
+        </small>
+    </h1>
+</div>
+<div id="right-menu" class="modal aside" data-body-scroll="false" data-offset="true" data-placement="right" data-fixed="true" data-backdrop="false" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">&times;</span>
+                    </button>
+                    Help Desk For User Management
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <h3 class="lighter">How to Add a User</h3>
+
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                <strong>Department :</strong>  Choose a department to complaint about.
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                List of Rooms in that department will appear after you choose a department.
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                Choose a Room from that list of rooms.
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                List of ITEMs in that Room will appear after you choose a Room.
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                Choose a Type of complaint about
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                <span class="red"> Hint:</span>  <strong> <u>System category</u> </strong>is related e.g: Computers, Projectors, Printers, Internet Connection issues etc.
+                <strong> <u>Technical Category</u></strong>is related e.g: Table, Chairs, Airconditioners, Boards issues etc.
+                <br />
+                <br />
+                <span class="coloremu">Delete User<i class="menu-icon fa fa-caret-right"></i></span>
+                <span class="red"> You can not delete a maintanence officer if the user registered any category!</span>
+                First of all, you should register your maintanence officer who is the new employee for related category.
+                Then, you can <span class="red">edit only</span> he/she info the related maintanence officer you want to delete
+                <br />                
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                1
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                2
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                3
+            </div>
+        </div><!-- /.modal-content -->
+
+        <button class="aside-trigger btn btn-info btn-app btn-xs ace-settings-btn" data-target="#right-menu" data-toggle="modal" type="button">
+            <i data-icon1="fa-plus" data-icon2="fa-minus" class="ace-icon fa fa-plus bigger-110 icon-only"></i>
+        </button>
+    </div><!-- /.modal-dialog -->
+</div>
+<div class="row">
+    <div class="col-md-10 col-xs-10 col-lg-10">
+        <div class="alert alert-info">
+            <button class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
+            Clik to button &nbsp;<i class="ace-icon fa bigger-110 icon-only fa-plus"></i> on the right  to see help Desk
+        </div>
+    </div>
+</div>
+
+
+@if (TempData["Info"] != null)
+{
+
+
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="alert alert-info">
+                <button class="close" data-dismiss="alert">
+                    <i class="ace-icon fa fa-times"></i>
+                </button>
+
+                <i class="ace-icon fa fa-hand-o-right"></i>
+                @TempData["Info"]
+            </div>
+            </div>
+        </div>
+            }
+@if (TempData["msg"] != null)
+{
+
+
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="alert alert-alert">
+                <button class="close" data-dismiss="alert">
+                    <i class="ace-icon fa fa-times"></i>
+                </button>
+
+                <i class="ace-icon fa fa-hand-o-right"></i>
+                @TempData["msg"]
+            </div>
+        </div>
+    </div>
+}
+
+
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <h3 class="header smaller lighter blue"> User Table                     
+                    </h3>
+               
+                    <div class="table-header">
+                        Results for "Latest Users Creation"
+                        <a class="pull-right white " href="@Url.Action("Index","User")">Click here for Reload the Table</a>
+                    </div>
+                    
+                
+                        @using GridMvc.Html
+                        @(Html.Grid(Model).Named("userGrid").Columns(columns =>
+                    {
+                    columns.Add()
+    .Encoded(false)
+    .Sanitized(false)
+    .SetWidth(30)
+    .RenderValueAs(d =>
+    @<b>@Html.ActionLink("Edit", "Edit", new { id = d.ID}) </b>
+                        );
+                    columns.Add()
+                    .Encoded(false)
+                    .Sanitized(false)
+                    .SetWidth(30)
+                    .RenderValueAs(d =>
+                        @<a href="#" id = "DeleteUser"  data-id="@d.ID"  > Delete </a>
+                        );
+                        columns.Add(m => m.UNI_ID).Titled("Univ.ID").Sortable(true).Filterable(true).ThenSortByDescending(m => m.UNI_ID).Sanitized(false).Encoded(false).RenderValueAs(model => Html.ActionLink(model.UNI_ID,
+     "Details", "User", new { id = model.ID }, null)
+       .ToHtmlString());
+                        columns.Add(m => m.LAST_NAME).Titled("Name Surname").Sortable(true).Filterable(true).RenderValueAs(m =>m.FIRST_NAME + " " + m.LAST_NAME);
+                        columns.Add(m => m.TITLE).Titled("Title").Sortable(true).Filterable(true);
+                        columns.Add(m => m.PHONE).Titled("Phone").Sortable(true).Filterable(true);
+                        columns.Add(m => m.EMAIL).Titled("E-mail").Sortable(true).Filterable(true);
+                        columns.Add(m => m.location.ROOM_ID).Titled("Location").Sortable(true).Filterable(true);
+                        columns.Add(m => m.location.departmant.DEPT_ID).Titled("Department").Sortable(true).Filterable(true);
+                        columns.Add(m => m.privilege.ROLE).Sortable(true).Titled("Role").Filterable(true);
+                        columns.Add(m => m.CREATED_DATE).Titled("Created Date").Sortable(true).Filterable(true).SortInitialDirection(GridMvc.Sorting.GridSortDirection.Descending);
+                        columns.Add(m => m.IsActive).Titled("IsActive").RenderValueAs(m => m.IsActive == true ? "Active" : "Deleted").Filterable(true).Sortable(true);
+                    }).WithPaging(10).EmptyText("No Data Found").Sortable(true).SetRowCssClasses(m => m.IsActive != true ? "text-muted" : "")
+                        )
+
+                </div>
+            </div>
+        
+
+@section PageInlineScripts {
+<script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>
+    <script src="@Url.Content("~/assets/js/bootstrap-datepicker.min.js")"></script>
+<script src="~/Scripts/gridmvc.js"></script>
+}
+                @section scripts 
+        {
+                  
+                    <script type="text/javascript">
+                        // Gather the data from <a href DOM with data-id on  and send as ajax to the user delete action.
+                        $(document).on("click", "#DeleteUser", function () {
+                            returnUser = new Object();
+                            returnUser.ID = $(this).attr("data-id");
+
+                            var deleteTR = $(this).closest("tr");
+
+                            swal({
+                                title: "User will Delete !",
+                                text: "Are you sure you want to Delete ?",
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "Yes, Delete",
+                                closeOnConfirm: true
+                            },
+                            function (isConfirm) {
+                                if (isConfirm) {
+                                    $.ajax({
+                                        url: '/User/Delete',
+                                        type: "POST",
+                                        data: returnUser,
+                                        dataType: 'json',
+                                        success: function (response) {
+                                            if (response.Success) {
+                                                $.notify(response.Message, "success" ,{position:"right" });
+                                                deleteTR.fadeOut(300, function () {
+                                                    deleteTR.remove();
+                                                })
+                                            }
+                                            else {
+                                                $.notify(response.Message, "error");
+                                            }
+
+
+                                        }
+
+                                    })
+                                }
+                            })
+                                
+
+
+                        });
+
+    jQuery(function ($) {
+        $('.modal.aside').ace_aside();
+
+        $('#aside-inside-modal').addClass('aside').ace_aside({ container: '#my-modal > .modal-dialog' });
+
+        //$('#top-menu').modal('show')
+
+        $(document).one('ajaxloadstart.page', function (e) {
+            //in ajax mode, remove before leaving page
+            $('.modal.aside').remove();
+            $(window).off('.aside')
+        });
+    });
+   
+</script>  
+
+
+
+                    }
+
+                

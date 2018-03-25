@@ -1,0 +1,55 @@
+﻿@model IEnumerable<EastMed.Data.Model.complaint>
+
+
+@foreach (var item in Model)
+{
+    <div class="profile-activity clearfix">
+        <a href="@Url.Action("Details","Complaint",new { id = item.ID })">
+            <div>
+                <i class="pull-left thumbicon fa fa-pencil-square-o btn-primary no-hover"></i>
+                <a class="user" href="@Url.Action("Details","Complaint",new { id = item.ID })">
+                    &nbsp;
+                    <i class="menu-icon fa fa-map-marker coloremu"></i>
+                    @item.location.departmant.DEPT_NAME &nbsp; @item.location.ROOM_ID
+                </a>
+                <i class="ace-icon fa fa-angle-double-right"></i>&nbsp; <span class="red">Category: </span>@item.category.CATEGORY_NAME <span class="red"> Item:&nbsp;</span>@item.item.ITEM_NAME @item.ITEM_ID
+                <i class="ace-icon fa fa-angle-double-right"></i>&nbsp; <span class="red"> Status: </span>
+                @if (item.STATUS.Trim().ToUpper() == "NEW")
+            {
+                    <span class="label label-warning">
+                        <i class="ace-icon fa fa-exclamation-triangle bigger-120"></i>
+                        @Html.DisplayFor(modelItem => item.STATUS)
+                    </span>
+            }
+            else if (item.STATUS.Trim().ToUpper() == "UNSOLVED")
+            {
+                    <span class="label label-danger arrowed-in">
+                        @Html.DisplayFor(modelItem => item.STATUS)
+                    </span>
+            }
+            else if (item.STATUS.Trim().ToUpper() == "SOLVED")
+            {
+                    <span class="label label-success arrowed-in">
+                        @Html.DisplayFor(modelItem => item.STATUS)
+                    </span>
+            }
+            else if (item.STATUS.Trim().ToUpper() == "ON PROGRESS")
+            {
+                    <span class="label label-info arrowed-in-right arrowed">
+                        @Html.DisplayFor(modelItem => item.STATUS)
+                    </span>
+            }
+                @if (item.ImgURL != null)
+            {
+                    <img class="pull-right img-responsive" alt="@item.location.ROOM_ID" src="@item.ImgURL" />
+            }
+
+
+                <div class="time">
+                    <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                    @item.START_DATE
+                </div>
+            </div>
+        </a>
+    </div>
+}

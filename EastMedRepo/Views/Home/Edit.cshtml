@@ -1,0 +1,137 @@
+﻿@model EastMedRepo.Models.UserVM
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-header">
+    <h1>
+     Edit Profile 
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            by Following information
+        </small>
+    </h1>
+</div><!-- /.page-header -->
+
+@if (TempData["info"] != null)
+{
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-lg-10">
+            <div class="alert alert-danger">
+                <button class="close" data-dismiss="alert">
+                    <i class="ace-icon fa fa-times"></i>
+
+                </button>
+                <strong><i class="ace-icon fa fa-check"></i></strong>
+                @TempData["info"]
+            </div>
+            <hr />
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("Edit", "Home", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data", id = "UserEditForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8 col-xs-12 col-lg-8">
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID)
+                <div class="space"></div>
+                <h4 class="header blue bolder smaller">About User</h4>
+              
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PASSWORD, "Password", htmlAttributes: new { @class = "control-label col-md-3 col-xs-4" })
+                    <div class="col-md-4 col-xs-4 col-lg-4">
+                        @Html.PasswordFor(x => x.PASSWORD, new { @class = "col-xs-10 col-sm-5 col-md-4 form-control", required = "required" })
+                        @Html.ValidationMessageFor(model => model.PASSWORD, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ComparePassword, "Confirm Password", htmlAttributes: new { @class = "control-label col-md-3 col-xs-4" })
+                    <div class="col-md-4 col-xs-4 col-lg-4">
+                        @Html.PasswordFor(x => x.ComparePassword, new { @class = "col-xs-10 col-sm-5 col-md-4 form-control" })
+                        @Html.ValidationMessageFor(model => model.ComparePassword, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+             
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PHONE, "Phone", htmlAttributes: new { @class = "control-label col-md-3 col-xs-4" })
+                    <div class="col-md-4 col-xs-4 col-lg-4">
+                        @Html.EditorFor(model => model.PHONE, new { htmlAttributes = new { @class = "form-control col-xs-10 col-sm-5 col-md-6" } })
+                        @Html.ValidationMessageFor(model => model.PHONE, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EMAIL, "E-Mail", htmlAttributes: new { @class = "control-label col-md-3 col-xs-4" })
+                    <div class="col-md-4 col-xs-4 col-lg-4">
+                        @Html.EditorFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-control col-xs-10 col-sm-5 col-md-6", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save Changes" class="btn btn-primary" id="EditUser" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-white btn-info" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#DepartmentID").change(function () {
+            var departmentID = $(this).val();
+           
+            $.ajax({
+                type: "Post",
+                url: "/User/GetLocationList?DepartmentID=" + departmentID,
+                contentType: "html",
+                success: function (response) {
+                 
+                    $("#LocationID").empty();
+                    $("#LocationID").append(response);
+                }
+            })
+        })
+    });
+    $(document).ready(function () {
+        $(document).on("click", "#EditUser", function () {
+            $('#UserEditForm').ajaxForm({
+                success: function (response) {
+                    if (response.Success) {
+                        bootbox.alert(response.Message, function () {
+                            location.reload();
+                        });
+
+                    }
+                    else {
+                        bootbox.alert(response.Message, function () {
+                        });
+                    }
+                }
+            })
+        })
+    });
+
+    </script>
+}
+
+

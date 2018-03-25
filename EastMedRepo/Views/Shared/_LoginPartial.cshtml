@@ -1,0 +1,53 @@
+﻿@if (Request.IsAuthenticated && ViewData.ContainsKey("FullName"))
+            {
+<li class="light-blue dropdown-modal">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+        <img class="nav-user-photo" src="~/assets/images/avatars/avatar2.png" alt="User's Photo" />
+        <span class="user-info">
+            <small>Welcome,</small>            
+            @ViewData["Fullname"]           
+        </span>
+
+        <i class="ace-icon fa fa-caret-down"></i>
+    </a>
+
+    <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+        
+        <li>
+            <a href="@Url.Action("Edit","Home",new { id = HttpContext.Current.Session["UserDatabaseID"] })">
+                <i class="ace-icon fa fa-user"></i>
+                Profile
+            </a>
+        </li>
+        <li class="divider"></li>
+
+        <li>
+@using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                {
+            if (User.Identity.IsAuthenticated)
+            {
+                    @Html.AntiForgeryToken()
+        <ul class="align-left  dropdown-caret dropdown-lighter">
+            <li>
+                <a id="logoutlink" href="javascript:document.getElementById('logoutForm').submit()">
+                    <i class="ace-icon fa fa-power-off"></i>Logout
+                </a>
+            </li>
+        </ul>
+   
+                }
+            }
+
+        </li>
+      
+    </ul>
+</li>
+    <script type="text/javascript">
+        $('#logoutlink').click(function () {
+            document.getElementById('logoutForm').submit();
+            logfunction;
+            return false;
+        });
+       
+    </script>
+}

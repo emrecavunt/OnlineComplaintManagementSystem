@@ -1,0 +1,347 @@
+﻿@*@model IEnumerable<EastMed.Data.Model.location>*@
+@model PagedList.IPagedList<EastMed.Data.Model.location>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Locations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h1>
+
+       
+
+        Create location
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                Add a new location
+            </small>
+    </h1>
+
+</div>
+<div id="right-menu" class="modal aside" data-body-scroll="false" data-offset="true" data-placement="right" data-fixed="true" data-backdrop="false" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">&times;</span>
+                    </button>
+                    Help Desk For Location Management
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <h3 class="lighter">How to Manage a Location</h3>
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                <strong>Delete :</strong>  You can not delete a location which is have already complaint in that location you want to delete. 
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+               <strong>Delete :</strong> You can not delete a location if that location is not belong to your department 
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                <strong>Edit: </strong> Be sure that , location you want to edit have to belong your department otherwise you will see an error!
+                <br />
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+              <strong> Add Location : </strong> You can only add a location which is belong to your Department
+                <br />
+                
+                <span class="coloremu"><i class="menu-icon fa fa-caret-right"></i></span>
+                <span class="red"> Hint:</span>  <strong> <u>Super Admin </u> </strong> the one who can delete another or edit any other location in different departments.
+                <br />
+                <br />              
+                <br />
+               
+                <br />
+                <br />
+                
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                1
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                2
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                3
+            </div>
+        </div><!-- /.modal-content -->
+
+        <button class="aside-trigger btn btn-info btn-app btn-xs ace-settings-btn" data-target="#right-menu" data-toggle="modal" type="button">
+            <i data-icon1="fa-plus" data-icon2="fa-minus" class="ace-icon fa fa-plus bigger-110 icon-only"></i>
+        </button>
+    </div><!-- /.modal-dialog -->
+</div>
+<div class="row">
+    <div class="col-md-10 col-xs-10 col-lg-10">
+        <div class="alert alert-info">
+            <button class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
+            Clik to button &nbsp;<i class="ace-icon fa bigger-110 icon-only fa-plus"></i> on the right  to see help Desk
+        </div>
+    </div>
+</div>
+
+@if (TempData["info"] != null)
+{
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-lg-10">
+            <div class="alert alert-success">
+                <button class="close" data-dismiss="alert">
+                    <i class="ace-icon fa fa-times"></i>
+
+                </button>
+                <strong><i class="ace-icon fa fa-check"></i></strong>
+                @TempData["info"]
+            </div>
+        </div>
+    </div>
+}
+@if (TempData["Msg"] != null)
+{
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-lg-10">
+            <div class="alert alert-success">
+                <button class="close" data-dismiss="alert">
+                    <i class="ace-icon fa fa-times"></i>
+
+                </button>
+                <strong><i class="ace-icon fa fa-check"></i></strong>
+                @TempData["Msg"]
+            </div>
+        </div>
+    </div>
+}
+<div id="modal-form" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="blue bigger">Details of Departments </h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+
+                    @Html.Action("Index", "Departmants")
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-sm" data-dismiss="modal">
+                    <i class="ace-icon fa fa-times"></i>
+                    Cancel
+                </button>                
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-10 col-md-10 col-md-offset-1">
+        <div class="clearfix">
+            <div class="pull-left tableTools-container">
+                <h4 class="pink">
+                    <i class="ace-icon fa fa-hand-o-right green"></i>
+                    <a href="#modal-form" role="button" class="blue" data-toggle="modal"> Click here to see departments List </a>
+                </h4>
+            </div>
+        </div>
+        <h3 class="header smaller lighter blue">locations Table</h3>
+
+        <div class="clearfix">
+            <div class="col-md-12 col-xs-12">
+                <div class="pull-right">
+
+                    @using (Html.BeginForm("Index", "Location", FormMethod.Get))
+            {
+                        <span>
+                            Find by Room No,Room Type or Department: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                        </span>
+                        <button type="submit" class="btn btn-white btn-primary" id="loading-btn">
+                            <i class="ace-icon fa fa-search  fa-fw"></i>Search
+                        </button>
+
+                    }
+                </div>
+                <div class="pull-left">
+                    <a href="@Url.Action("Index","Location")" class="btn btn-white btn-primary">
+
+                        <i class="ace-icon fa fa-refresh fa-fw"></i>
+
+                        Reload
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="space-8"></div>
+        <div class="table-header">
+            Results for Locations
+        </div>
+        <div class="table-responsive">
+            <table id="dynamic-table" class="table table-striped table-bordered table-hover ">               
+                <thead>
+                    <tr>
+                        
+                        <th>
+                            @*( Sending the request of Department ID  for client to the action as a <a href=""> like linking in php.)*@
+                            @Html.ActionLink("Department", "Index", new { sortOrder = ViewBag.DepartmentSortParm, currentFilter = ViewBag.CurrentFilter })
+                        </th>
+                        <th>
+                            @*( Sending the request of Rooms for client to the action as a <a href=""> like linking in php.)*@
+                            @Html.ActionLink("Room No", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                        </th>
+                        <th>
+                            @*( Sending the request of Type for client to the action as a <a href=""> like linking in php.)*@
+                            @Html.ActionLink("Room Type", "Index", new { sortOrder = ViewBag.RoomSortParm, currentFilter = ViewBag.CurrentFilter })
+                        </th>
+                        <th> 
+                            @*( Sending the request pf Created Date for client to the action as a <a href=""> like linking in php.)*@                          
+                            @Html.ActionLink("Created Date", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+                        </th>
+                        <th class="hidden-480">                           
+                            Updated Date
+                        </th>
+                        <th>                           
+                            IsActive
+                        </th>
+                        <th>
+                            Process
+                        </th>
+                    </tr>
+                </thead>
+@if (Model.Count() == 0)
+{
+                <tbody>
+                   
+                        <tr>
+                            <td colspan="7">
+                                <span class="label label-default">
+                                    No rows match Search criteria
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    }
+                    else
+                    { 
+    <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td>                                
+                                    @Html.DisplayFor(modelItem => item.departmant.DEPT_NAME)                                
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ROOM_ID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TYPE)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CREATED_DATE)
+                            </td>
+                            <td class="hidden-480">
+                                @Html.DisplayFor(modelItem => item.UPDATED_DATE)
+                            </td>
+                            <td class="center">
+                                @if (item.IsActive == true)
+                                {
+                                    <b class="label label-success">Active</b>
+                                }
+                                else
+                                {
+                                    <b class="label label-danger">Passive</b>
+                                }
+                            </td>
+                            <td>
+                                
+                                @Html.ActionLink("Edit", "Edit", new {  id = item.ID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                            </td>
+                        </tr>
+
+
+                    }
+                   
+                </tbody>
+}
+            </table>
+
+
+        </div> <!--Table End-->
+
+        <div class="tableTools-container">
+            <div class="table-details">
+                <div class="col-xs-6">
+                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                </div>
+                <div class="col-xs-6">
+                    <div class="dataTables_paginate pagedList pagination-sm">
+                        @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+@section Scripts 
+{
+    <script type="text/javascript">
+
+        jQuery(function ($) {
+            $('.modal.aside').ace_aside();
+
+            $('#aside-inside-modal').addClass('aside').ace_aside({ container: '#my-modal > .modal-dialog' });
+
+            //$('#top-menu').modal('show')
+
+            $(document).one('ajaxloadstart.page', function (e) {
+                //in ajax mode, remove before leaving page
+                $('.modal.aside').remove();
+                $(window).off('.aside')
+            });
+        });
+
+    </script>
+    }

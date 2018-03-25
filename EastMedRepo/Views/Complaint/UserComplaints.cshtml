@@ -1,0 +1,87 @@
+﻿@model IEnumerable<EastMedRepo.Models.ComplaintModel>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.COMMENT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.STATUS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.STARTDATE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRIORITY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoomNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.itemName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ITEM_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImgUrl)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.COMMENT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.STATUS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.STARTDATE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRIORITY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoomNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.itemName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ITEM_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImgUrl)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ComplaintId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ComplaintId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ComplaintId })
+        </td>
+    </tr>
+}
+
+</table>

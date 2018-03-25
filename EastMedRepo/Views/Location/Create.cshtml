@@ -1,0 +1,94 @@
+﻿@model EastMed.Data.Model.location
+@using EastMedRepo.Models
+@{
+    ViewBag.Title = "Create Location";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h4 class="coloremu">
+        <i class="ace-icon fa fa-map-marker"></i>
+        @ViewBag.Title
+    </h4>
+</div>
+@if (TempData["info"] != null)
+{
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-lg-10">
+            <div class="alert alert-danger">
+                <button class="close" data-dismiss="alert">
+                    <i class="ace-icon fa fa-times"></i>
+
+                </button>
+                <strong><i class="ace-icon fa fa-check"></i></strong>
+                @TempData["info"]
+            </div>
+            <hr />
+        </div>
+    </div>
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8 col-xs-12 col-lg-8">
+
+            <div class="form-horizontal">
+                <div class="space"></div>
+                <h4 class="header blue bolder smaller">Location Creation</h4>
+                <fieldset>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FK_DEPT_ID, "Department", htmlAttributes: new { @class = "control-label col-sm-12 col-xs-12 col-md-3" })
+                        <div class="col-md-4 col-xs-9 col-sm-9 col-lg-4">
+                            @Html.DropDownList("FK_DEPT_ID", null, htmlAttributes: new { @class = "form-control  col-xs-10 col-sm-10 col-md-6" })
+                            @Html.ValidationMessageFor(model => model.FK_DEPT_ID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ROOM_ID, "Room ID", htmlAttributes: new { @class = "control-label col-sm-12 col-xs-12 col-md-3" })
+                        <div class="col-md-4 col-xs-9 col-sm-9 col-lg-4">
+                            @Html.EditorFor(model => model.ROOM_ID, new { htmlAttributes = new { @class = "form-control  col-xs-10 col-sm-10 col-md-6" } })
+                            @Html.ValidationMessageFor(model => model.ROOM_ID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TYPE, "Type", htmlAttributes: new { @class = "control-label col-sm-12 col-xs-12 col-md-3" })
+                        <div class="col-md-3 col-3 col-xs-9 col-sm-9 col-lg-4">
+                            @Html.AutocompleteFor(model => model.TYPE, model => model.ID, "GetRoomType", "Location", false)
+                            
+                            @Html.ValidationMessageFor(model => model.TYPE, "", new { @class = "text-danger " })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-sm-12 col-xs-12 col-md-3" })
+                        <div class="col-md-4 col-xs-4 col-sm-9 col-lg-4">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(x => x.IsActive, new { @checked = "checked", @class = "lbl", @type = "checkbox" })                                
+                                @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = " text-danger  " })
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                            <button class="btn btn-light" type="reset">
+                                <i class="ace-icon fa fa-undo bigger-110"></i>
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+
+}
+<div class="space-16"></div>
+<div>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-white btn-info" })
+</div>

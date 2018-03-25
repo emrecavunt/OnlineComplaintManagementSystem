@@ -1,0 +1,15 @@
+﻿
+
+@if (ViewBag.Itemoptions != null)
+{
+    <option value="">--Select Item--</option>
+    foreach (var item in ViewBag.Itemoptions)
+    {
+        <option value="@item.Value">@item.Text</option>
+    }
+}
+else
+{
+    <option value="">--Location Doesn't have item--</option>
+
+}

@@ -1,0 +1,75 @@
+﻿@model EastMed.Data.Model.category
+
+@{
+    ViewBag.Title = "Category Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="page-header">
+    <h1>
+        Category Details
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            Details for category
+        </small>
+    </h1>
+</div>
+<div class="row">
+    <div class="col-md-offset-2 col-md-8 col-xs-12 col-lg-8">
+        <div class="space"></div>
+        <h4 class="header blue bolder smaller">Details For @Model.CATEGORY_NAME Category </h4>
+
+        <div class="form-horizontal">
+            <fieldset>
+                <div class="profile-user-info">
+
+                    <div class="profile-info-row">
+                        <div class="profile-info-name">
+                          
+                            Responsible User
+                            
+                        </div>
+                        <div class="profile-info-value">                            
+                            @Html.DisplayFor(model => model.user.FIRST_NAME)  @Html.DisplayFor(model => model.user.LAST_NAME)                            
+                        </div>
+                    </div>
+                    <div class="profile-info-row">
+                        <div class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.CATEGORY_NAME)
+                        </div>
+
+                        <div class="profile-info-value">
+                            @Html.DisplayFor(model => model.CATEGORY_NAME)
+                        </div>
+                    </div>
+                    <div class="profile-info-row">
+                        <div class="profile-info-name">
+
+                            @Html.DisplayNameFor(model => model.DESCRIPTION)
+                        </div>
+                        <div class="profile-info-value">
+                            @Html.DisplayFor(model => model.DESCRIPTION)
+                        </div>
+                    </div>
+                    <div class="profile-info-row">
+                        <div class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.IsActive)
+                        </div>
+                        <div class="profile-info-value">
+                            @Html.DisplayFor(model => model.IsActive)
+                        </div>
+                    </div>
+                </div>
+                <div class="space"></div>
+                <hr />
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-white btn-info" }) |
+                    @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-white btn-info" })
+                </p>
+            </fieldset>
+        </div>
+    </div>
+</div>
+                    
+

@@ -1,0 +1,101 @@
+﻿@model EastMed.Data.Model.category
+
+@{
+    ViewBag.Title = "Create Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+            <div class="page-header">
+                <h1>
+                    Create category
+                    <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        Add a new category for the maintanence officer
+                    </small>
+                </h1>
+            </div>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+              
+                        <div class="row">
+                            <div class="col-md-offset-2 col-md-10 col-xs-12 col-lg-8">
+
+                                <div class="space"></div>
+                                <h4 class="header blue bolder smaller">Category</h4>
+                                <div class="form-horizontal">
+
+                                    <field>
+
+
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.CATEGORY_NAME, htmlAttributes: new { @class = "control-label col-md-3" })
+                                            <div class="col-md-4 col-xs-4 col-lg-4">
+                                                @Html.EditorFor(model => model.CATEGORY_NAME, new { htmlAttributes = new { @class = "form-control" , required = "required" } })
+                                                @Html.ValidationMessageFor(model => model.CATEGORY_NAME, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.DESCRIPTION, htmlAttributes: new { @class = "control-label col-md-3" })
+                                            <div class="col-md-4 col-xs-4 col-lg-4">
+                                                @Html.EditorFor(model => model.DESCRIPTION, new { htmlAttributes = new { @class = "form-control",required = "required" } })
+                                                @Html.ValidationMessageFor(model => model.DESCRIPTION, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.FK_USER_ID, htmlAttributes: new { @class = "control-label col-md-3" })
+                                            <div class="col-md-4 col-xs-4 col-lg-4">
+                                                @*ViewBag.FK_USER_ID*@
+                                                @Html.DropDownListFor(m => m.FK_USER_ID, ViewBag.FK_USER_ID as SelectList, "--Select User--", new { @class = "form-control" ,required= "required" })
+                                             
+                                                @Html.ValidationMessageFor(model => model.FK_USER_ID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-3" })
+                                            <div class="col-md-4 col-xs-4 col-lg-4">
+                                                <div class="checkbox">
+                                                    @Html.EditorFor(model => model.IsActive,new {  @checked ="checked"   })
+                                                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    
+                                        <hr />
+                                        <div class="clearfix form-actions">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <button class="btn btn-info" type="submit" >
+                                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                                    Save
+                                                </button>
+
+                                                &nbsp; &nbsp; &nbsp;
+                                                <button class="btn" type="reset">
+                                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                                    Reset
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </field>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        }
+
+                        <div>
+                            @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-white btn-info" })
+                        </div>
+
+                        @section Scripts {
+                            @Scripts.Render("~/bundles/jqueryval")
+                        }

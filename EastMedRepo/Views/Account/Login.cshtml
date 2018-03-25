@@ -1,0 +1,227 @@
+﻿@model EastMedRepo.Models.LoginViewModel
+@using CaptchaMvc.HtmlHelpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>Login Page - EastMed Complaint Management System</title>
+    <meta name=”owner” content=”EmreCavunt” />
+    <meta name="description" content="Emre Cavunt kimdir" />
+    <meta name=”title” content="Emre Cavunt info" />
+    <meta name=”keywords” content="Emre cavunt, Emre Çavunt, Emre Çavunt kimdir, Emre Çavunt Oracle" />
+    <meta name=”author” content="Emre Çavunt, Emre Cavunt" />
+    <meta name="yandex-verification" content="8062f758a79ecb99" />
+    <meta name="google-site-verification" content="MphbjBZvWnVBluhpVV6jxSv4TB693RBD7-QNO7GOYl0" />
+    <meta name=”copyright” content="(c) 2017" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <link rel="icon" href="~/assets/images/emulogo.png" type="image/x-icon" />
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+ 
+    <!-- text fonts -->
+    <link rel="stylesheet" href="~/assets/css/fonts.googleapis.com.css" />
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="~/assets/css/ace.min.css" />
+
+
+    <link href="~/Content/DefaultStyle.css" rel="stylesheet" />
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+   
+</head>
+
+<body class="login-layout light-login">
+    <div class="main-container">
+        <div class="main-content">
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <div class="login-container">
+                        <div class="center">
+                            <h1 style="font-size:30px">
+                                <!---->
+                                <img class="ace-icon fa" src="~/assets/images/emulogo.png" />
+
+
+                                <span class="coloremu">EastMed</span>
+                                <span class="red" id="id-text2">Application</span>
+                            </h1>
+                            <h4 class="coloremu" id="id-company-text">&copy; CTMS </h4>
+                        </div>
+
+                        <div class="space-6"></div>
+
+                        <div class="position-relative">
+                            <div id="login-box" class="login-box visible widget-box no-border">
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <h4 class="header coloremu lighter bigger">
+                                            <i class="glyphicon glyphicon-exclamation-sign "></i>
+                                            Please Enter Your Information
+                                        </h4>
+
+                                        <div class="space-6"></div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+                                        
+                                            <fieldset>
+                                                @Html.ValidationSummary(true)
+                                                <label class="block clearfix">
+                                                    <span class="block input-icon input-icon-right">
+                                                        @Html.EditorFor(model => model.UNI_ID, new { htmlAttributes = new { @class = "form-control" , @placeholder = "Uni ID" } })
+                                                        @Html.ValidationMessageFor(model => model.UNI_ID, "", new { @class = "text-danger" })
+                                                       
+                                                        <i class="ace-icon fa fa-user"></i>
+                                                    </span>
+                                                </label>
+
+                                                <label class="block clearfix">
+                                                    <span class="block input-icon input-icon-right">
+                                                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger"  })
+                                                       
+                                                        <i class="ace-icon fa fa-lock"></i>
+                                                    </span>
+                                                </label>
+
+                                                <div class="space"></div>
+
+                                                <div class="clearfix">
+                                                    <label class="inline">
+                                                        @Html.EditorFor(model => model.RememberMe)
+                                                      
+                                                        <span class="lbl"> Remember Me</span>
+                                                    </label>
+                                                    <span class="block input-icon input-icon-right">@Html.Captcha(5)</span>
+                                                    <br /> <p class="red"> @ViewBag.ErrorMessage </p> <p>
+                                                        <button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
+                                                            <i class="ace-icon fa fa-key"></i>
+                                                            <span class="bigger-110">Login</span>
+                                                        </button>
+</div>
+
+                                                <div class="space-4"></div>
+                                            </fieldset>
+                                        
+}
+                                        <div class="space-6"></div>
+                                        <div class="social-or-login center">
+
+                                        </div>
+
+
+
+                                        <div class="social-login center">
+                                        </div>
+                                    </div><!-- /.widget-main -->
+                                    <div class="toolbar clearfix">
+                                        <div>
+                                            <a href="#" data-target="#forgot-box" class="forgot-password-link">
+                                                <i class="ace-icon fa fa-arrow-left"></i>
+                                                I forgot my password
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div><!-- /.widget-body -->
+                            </div><!-- /.login-box -->
+
+                            <div id="forgot-box" class="forgot-box widget-box no-border">
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <h4 class="header red lighter bigger">
+                                            <i class="ace-icon fa fa-key"></i>
+                                            Retrieve Password
+                                        </h4>
+
+                                        <div class="space-6"></div>
+                                        <p>
+                                            Enter information below and to receive instructions to your email
+                                        </p>
+
+                                       @using (Html.BeginForm("ForgotPassword", "Account", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data"}))
+                                       {
+                                             @Html.AntiForgeryToken()
+                                    
+                                            <fieldset>
+                                                <label class="block clearfix">
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="email" class="form-control" placeholder="Uni ID" />
+                                                        <i class="ace-icon fa fa-id-card"></i>
+                                                    </span>
+
+                                                </label>
+                                                <label class="block clearfix">
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="email" class="form-control" placeholder="Name" />
+                                                        <i class="ace-icon fa fa-id-card"></i>
+                                                    </span>
+
+                                                </label>
+                                                <label class="block clearfix">
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="email" class="form-control" placeholder="Surname" />
+                                                        <i class="ace-icon fa fa-id-card"></i>
+                                                    </span>
+                                                </label>                                              
+                                                <div class="clearfix">                                                    
+                                                        <span class="block input-icon input-icon-right">@Html.Captcha(5)</span>
+                                                        <br /> <p class="red"> @ViewBag.ErrorMessage </p> <p>
+                                                            <button type="submit" class="width-35 pull-right btn btn-sm btn-danger">
+                                                                <i class="ace-icon fa fa-lightbulb-o"></i>
+                                                                <span class="bigger-110">Send Me!</span>
+                                                            </button>                                                    
+                                                </div>                                              
+                                            </fieldset>
+                                        }
+                                    </div><!-- /.widget-main -->
+                                    <div class="toolbar center">
+                                        <a href="#" data-target="#login-box" class="back-to-login-link">
+                                            Back to login
+                                            <i class="ace-icon fa fa-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div><!-- /.widget-body -->
+                            </div><!-- /.forgot-box -->
+
+                           
+                        </div><!-- /.position-relative -->
+
+                      
+                    </div>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.main-content -->
+    </div><!-- /.main-container -->
+    <!-- basic scripts -->
+   
+    <script src="~/assets/js/jquery-2.1.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  
+    <script src="~/assets/js/bootstrap.min.js"></script>
+   
+    <script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+    </script>
+
+    <!-- inline scripts related to this page -->
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $(document).on('click', '.toolbar a[data-target]', function (e) {
+                e.preventDefault();
+                var target = $(this).data('target');
+                $('.widget-box.visible').removeClass('visible');//hide others
+                $(target).addClass('visible');//show target
+            });
+        });
+
+    </script>
+</body>
+</html>
+

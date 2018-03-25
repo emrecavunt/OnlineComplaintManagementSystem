@@ -1,0 +1,99 @@
+﻿@model EastMed.Data.Model.category
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="page-header">
+    <h1>
+        Delete Category
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            @Model.CATEGORY_NAME
+        </small>
+    </h1>
+</div>
+@if (TempData["error"] != null)
+    {
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-lg-10">
+            <div class="alert alert-danger">
+                <button class="close" data-dismiss="alert">
+                    <i class="ace-icon fa fa-times"></i>
+
+                </button>
+                <strong><i class="ace-icon fa fa-check"></i></strong>
+                @TempData["error"]
+            </div>
+        </div>
+    </div>
+    }
+<div class="row">
+    <div class="col-md-offset-2 col-md-8 col-xs-12 col-lg-8">
+        <div class="space"></div>
+        <h4 class="header blue bolder smaller"> Are you sure you want to delete this  category  &nbsp; @Model.CATEGORY_NAME?</h4>
+        <div class="form-horizontal">
+            <fieldset>
+                
+                <div class="alert alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <i class="ace-icon fa fa-times"></i>
+
+                    </button>
+                    <strong> Warning!</strong>
+                    This data will detele permanentily from database!
+                    <br />
+                </div>
+
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.user.FIRST_NAME)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.user.FIRST_NAME)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CATEGORY_NAME)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CATEGORY_NAME)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DESCRIPTION)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DESCRIPTION)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.IsActive)
+                    </dd>
+
+                </dl>
+            </fieldset>
+        </div>
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-primary" /> |
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-white btn-info" })
+            </div>
+        }
+    </div>
+</div>

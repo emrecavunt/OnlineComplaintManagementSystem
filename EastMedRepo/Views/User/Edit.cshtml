@@ -1,0 +1,243 @@
+﻿@model EastMedRepo.Models.UserVM
+
+@{
+    ViewBag.Title = "Edit User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+
+    <h5 class="coloremu">
+       
+        @ViewBag.Title <i class="ace-icon fa fa-angle-double-right"></i> @Html.DisplayFor(model => model.FIRST_NAME, new { @class = "control-label col-md-3 col-xs-4" })
+    </h5>
+    
+</div>
+
+<!-- In this form we used bootbox alert method. But you can eliminate the form id and bootbox from the javaScript to use Validation message from 
+    model data annotions both work either way.
+    -- Bootbox recieve the jsonResult method messege to check if success or not and than display the popup.
+    -->
+@using (Html.BeginForm("Edit", "User", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data", id = "UserEditForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8 col-xs-12 col-lg-8">
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID)
+                <div class="space"></div>
+                <h4 class="header blue bolder smaller">About User</h4>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UNI_ID, "University ID", htmlAttributes: new { @class = "control-label col-md-3 col-xs-4" })
+                    <div class="col-md-4 col-xs-4 col-lg-4">
+                        @Html.EditorFor(model => model.UNI_ID, new { htmlAttributes = new { @class = " col-xs-10 col-sm-5 col-md-6 form-control" } })
+                        @Html.ValidationMessageFor(model => model.UNI_ID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FIRST_NAME, "First Name", htmlAttributes: new { @class = "control-label col-md-3 col-xs-4" })
+                    <div class="col-md-4 col-xs-4 col-lg-4">
+                        @Html.EditorFor(model => model.FIRST_NAME, new { htmlAttributes = new { @class = "form-control col-xs-10 col-sm-5 col-md-6" } })
+                        @Html.ValidationMessageFor(model => model.FIRST_NAME, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LAST_NAME, "Last Name", htmlAttributes: new { @class = "control-label col-md-3 col-xs-4" })
+                    <div class="col-md-4 col-xs-4 col-lg-4">
+                        @Html.EditorFor(model => model.LAST_NAME, new { htmlAttributes = new { @class = "form-control col-xs-10 col-sm-5 col-md-6" } })
+                        @Html.ValidationMessageFor(model => model.LAST_NAME, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PASSWORD, "Password", htmlAttributes: new { @class = "control-label col-md-3 col-xs-4" })
+                    <div class="col-md-4 col-xs-4 col-lg-4">
+                        @Html.PasswordFor(x => x.PASSWORD, new { @class = "col-xs-10 col-sm-5 col-md-4 form-control" , required = "required" })                       
+                        @Html.ValidationMessageFor(model => model.PASSWORD, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ComparePassword, "Confirm Password", htmlAttributes: new { @class = "control-label col-md-3 col-xs-4" })
+                    <div class="col-md-4 col-xs-4 col-lg-4">
+                        @Html.PasswordFor(x => x.ComparePassword, new { @class = "col-xs-10 col-sm-5 col-md-4 form-control" })                        
+                        @Html.ValidationMessageFor(model => model.ComparePassword, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FK_PRIVILEGE_ID, "Role", htmlAttributes: new { @class = "control-label col-md-3 col-xs-4" })
+                    <div class="col-md-4 col-xs-4 col-lg-4">
+                        @Html.DropDownListFor(model => model.FK_PRIVILEGE_ID, new SelectList(ViewBag.Role, "ID", "Role"), ("--Choose--"), htmlAttributes: new { @class = "form-control col-xs-10 col-sm-5 col-md-6" , required = "required" })
+                        @Html.ValidationMessageFor(model => model.FK_PRIVILEGE_ID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="space"></div>
+                <h4 class="header blue bolder smaller">Contact info</h4>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TITLE, "Title", htmlAttributes: new { @class = "control-label col-md-3 col-xs-4" })
+                    <div class="col-md-4 col-xs-4 col-lg-4">
+                        @Html.EditorFor(model => model.TITLE, new { htmlAttributes = new { @class = "form-control col-xs-10 col-sm-5 col-md-6" } })
+                        @Html.ValidationMessageFor(model => model.TITLE, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PHONE, "Phone", htmlAttributes: new { @class = "control-label col-md-3 col-xs-4" })
+                    <div class="col-md-4 col-xs-4 col-lg-4">
+                        @Html.EditorFor(model => model.PHONE, new { htmlAttributes = new { @class = "form-control col-xs-10 col-sm-5 col-md-6" } })
+                        @Html.ValidationMessageFor(model => model.PHONE, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EMAIL, "E-Mail", htmlAttributes: new { @class = "control-label col-md-3 col-xs-4" })
+                    <div class="col-md-4 col-xs-4 col-lg-4">
+                        @Html.EditorFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-control col-xs-10 col-sm-5 col-md-6" , required = "required" }  })
+                        @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+                <div class="space"></div>
+                <h4 class="header blue bolder smaller">Location</h4>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.location.departmant.DEPT_NAME, "Departmant Name", htmlAttributes: new { @class = "control-label col-md-3 col-xs-4" })
+                    <div class="col-md-4 col-xs-4 col-lg-4">
+                        @if (ViewBag.DepartmentList != null)
+                        {
+
+
+                            @Html.DropDownListFor(m => m.DepartmentID, ViewBag.DepartmentList as SelectList, "--Select Department--", new { @class = "form-control" , required = "required" })
+
+                        }
+
+                        @Html.ValidationMessageFor(x => x.DepartmentID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FK_LOCATION_ID, "Room ID", htmlAttributes: new { @class = "control-label col-md-3 col-xs-4" })
+                    <div class="col-md-6 col-xs-4 col-lg-4">
+                        @Html.DropDownListFor(m => m.LocationID, new SelectList(""), "--Select Location--", new { @class = "form-control", required="required" , id = "LocationID" })
+                        @Html.ValidationMessageFor(model => model.LocationID, "", new { @class = "text-danger" })
+                        
+                    </div>
+                </div>
+                
+                <div class="space-4"></div>
+                <h4 class="header blue bolder smaller">Date of User</h4>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CREATED_DATE,"Created Date", htmlAttributes: new { @class = "control-label col-xs-4 col-md-3" })
+                    <div class="col-xs-12 col-md-4 col-lg-4">
+                        <label class="label label-xlg label-white coloremu">
+                            @Html.DisplayFor(model => model.CREATED_DATE)
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UPDATED_DATE, " Updated Date",  htmlAttributes: new { @class = "control-label col-xs-4 col-md-3" })
+                    <div class="col-xs-12 col-md-4 col-lg-4">
+
+                        @if((Convert.ToString(Model.UPDATED_DATE) == null))
+                        {
+                            <span class="label label-xlg label-info label-white middle ">Has not been Updated</span>
+                        }
+                        else
+                        {
+                            <span class="label label-xlg label-white coloremu">
+                                @Html.DisplayFor(model => model.UPDATED_DATE)
+                            </span>
+                        }
+
+                    </div>
+                    </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LAST_LOGINDATE,"Last Login Date", htmlAttributes: new { @class = "control-label col-xs-4 col-md-3" })
+                    <div class="col-xs-12 col-md-4 col-lg-4">
+
+                        @if ((Convert.ToString(Model.LAST_LOGINDATE) == null))
+                        {
+                            <span class="label label-xlg label-info label-white middle ">Has not been Login yet.</span>
+                        }
+                        else
+                        {
+                            <span class="label label-xlg label-white coloremu">
+                                @Html.DisplayFor(model => model.LAST_LOGINDATE)
+                            </span>
+                        }
+
+                    </div>
+                </div>
+                    <hr />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IsActive, "Is Active", htmlAttributes: new { @class = "control-label col-md-3 col-xs-4" })
+                        <div class="col-md-4 col-xs-4 col-lg-4">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.IsActive)
+                                @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save Changes" class="btn btn-primary" id="EditUser" />
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-white btn-info" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#DepartmentID").change(function () {
+            var departmentID = $(this).val();
+           
+            $.ajax({
+                type: "Post",
+                url: "/User/GetLocationList?DepartmentID=" + departmentID,
+                contentType: "html",
+                success: function (response) {
+                    
+                    $("#LocationID").empty();
+                    $("#LocationID").append(response);
+                }
+            })
+        })
+    });
+    $(document).ready(function () {
+        $(document).on("click", "#EditUser", function () {
+            $('#UserEditForm').ajaxForm({
+                success: function (response) {
+                    if (response.Success) {
+                        bootbox.alert(response.Message, function () {
+                            location.reload();
+                        });
+
+                    }
+                    else {
+                        bootbox.alert(response.Message, function () {
+                        });
+                    }
+                }
+            })
+        })
+    });
+   
+    </script>
+}

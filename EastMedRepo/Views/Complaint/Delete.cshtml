@@ -1,0 +1,170 @@
+﻿@model EastMed.Data.Model.complaint
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h1>
+        Delete Complaint @Model.ID
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+           Category of @Model.category.CATEGORY_NAME
+        </small>
+    </h1>
+</div>
+
+@if (TempData["error"] != null)
+{
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-lg-10">
+            <div class="alert alert-danger">
+                <button class="close" data-dismiss="alert">
+                    <i class="ace-icon fa fa-times"></i>
+
+                </button>
+                <strong><i class="ace-icon fa fa-check"></i></strong>
+                @TempData["error"]
+            </div>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-md-offset-2 col-md-8 col-xs-12 col-lg-8">
+        <div class="space"></div>
+        <h4 class="header blue bolder smaller"> Are you sure you want to delete that complaint   &nbsp; @Model.ID?</h4>
+        <div class="form-horizontal">
+            <fieldset>
+
+
+                <div class="alert alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <i class="ace-icon fa fa-times"></i>
+
+                    </button>
+                    <strong> Warning!</strong>
+                    This complaint will detele permanentily from database!
+                    <br />
+                </div>
+
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                    Complaint Category
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.category.CATEGORY_NAME)
+                    </dd>                  
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.COMMENT)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.COMMENT)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.STATUS)
+                    </dt>
+
+                    <dd>
+                        @if (Model.STATUS.Trim().ToUpper() == "NEW")
+                        {
+                            <span class="label label-warning">
+                                <i class="ace-icon fa fa-exclamation-triangle bigger-120"></i>
+                                @Html.DisplayFor(modelItem => Model.STATUS)
+                            </span>
+                        }
+                        else if (Model.STATUS.Trim().ToUpper() == "UNSOLVED")
+                        {
+                            <span class="label label-danger arrowed-in">
+                                @Html.DisplayFor(modelItem => Model.STATUS)
+                            </span>
+                        }
+                        else if (Model.STATUS.Trim().ToUpper() == "SOLVED")
+                        {
+                            <span class="label label-success arrowed-in">
+                                @Html.DisplayFor(modelItem => Model.STATUS)
+                            </span>
+                        }
+                        else if (Model.STATUS.Trim().ToUpper() == "ON PROGRESS")
+                        {
+                            <span class="label label-info arrowed-in-right arrowed">
+                                @Html.DisplayFor(modelItem => Model.STATUS)
+                            </span>
+                        }
+
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.START_DATE)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.START_DATE)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PRIORITY)
+                    </dt>
+
+                    <dd>
+                        @if (@Model.PRIORITY <= 1)
+                        {
+                            <span class="label label-info arrowed-in-right arrowed"> Low </span>
+                        }
+                        else if (@Model.PRIORITY >= 2)
+                        {
+                            <span class="label label-warning"> Average </span>
+                        }
+                        else if (@Model.PRIORITY >= 3)
+                        {
+                            <span class="label label-danger arrowed-in">High</span>
+                        }
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.location.ROOM_ID)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayNameFor(model => model.location.ROOM_ID)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.item.ITEM_NAME)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.item.ITEM_NAME)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ITEM_ID)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ITEM_ID)
+                    </dd>
+
+                </dl>
+            </fieldset>
+        </div>
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-primary" /> |
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-white btn-info" })
+            </div>
+        }
+    </div>
+</div>
+
+

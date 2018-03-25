@@ -1,0 +1,337 @@
+﻿@model IEnumerable<EastMedRepo.Models.ComplaintModel>
+
+@{
+    ViewBag.Title = "MaintanenceComplaintView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section PagePluginStyles {
+
+    <link href="~/assets/css/lightbox.min.css" rel="stylesheet" />
+
+}
+<div class="page-header">
+    <h1>
+        Complaints
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+
+            Complaints list
+
+        </small>
+    </h1>
+</div>
+<div id="right-menu-complaint" class="modal aside" data-body-scroll="false" data-offset="true" data-placement="right" data-fixed="true" data-backdrop="false" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">&times;</span>
+                    </button>
+                    Help Desk For Complaint Management
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <h3 class="lighter">Help For Process Tool</h3>
+
+                <br />
+                <i class="menu-icon fa fa-caret-right"></i> You can use the <span class="blue">
+                    <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                </span> button to see the details of that row.
+                <br />
+                <i class="menu-icon fa fa-caret-right"></i>  You can use the <span class="red">
+                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                </span> button to <strong>delete</strong> that complaint in that row.
+                <br />
+                <i class="menu-icon fa fa-caret-right"></i> You can use the <span class="green">
+                    <i class="ace-icon fa fa-pencil bigger-120"></i>
+                </span> button to <strong>EDIT</strong> that complaint in that row.
+                <br />
+                <i class="menu-icon fa fa-caret-right"></i>   <span class="blue">
+                    <i class="ace-icon fa fa-hand-pointer-o bigger-120"></i>
+                </span> Click on any image to see more clearly in a window.
+                <h3 class="lighter">Help For Complaint Details </h3>
+                <br />
+                <i class="menu-icon fa fa-caret-right"></i>   You can use the <span class="blue">
+                    <i class="ace-icon fa fa-print bigger-120"></i>
+                </span> button to print the details of that complaint.
+                <br />
+                <i class="menu-icon fa fa-caret-right"></i>  Complaint History table will be uptaded automaticly when any maintenance officer seen or update a complaint
+                <br />
+                <h3 class="lighter">Help For Process Tool</h3>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                1
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                2
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                3
+            </div>
+        </div><!-- /.modal-content -->
+
+        <button class="aside-trigger btn btn-info btn-app btn-xs ace-settings-btn" data-target="#right-menu-complaint" data-toggle="modal" type="button">
+            <i data-icon1="fa-plus" data-icon2="fa-minus" class="ace-icon fa fa-plus bigger-110 icon-only"></i>
+        </button>
+    </div><!-- /.modal-dialog -->
+</div>
+<div class="row">
+    <div class="col-md-10 col-xs-10 col-lg-10">
+        <div class="alert alert-info">
+            <button class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit!
+        </div>
+    </div>
+</div>
+
+@if (TempData["Info"] != null)
+{
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-lg-10">
+            <div class="alert alert-success">
+                <button class="close" data-dismiss="alert">
+                    <i class="ace-icon fa fa-times"></i>
+
+                </button>
+                <strong><i class="ace-icon fa fa-check"></i></strong>
+                @TempData["Info"] = "Your complaint has been sended!";
+            </div>
+        </div>
+    </div>
+}
+<h3 class="header smaller lighter blue">All Complaints </h3>
+
+<div class="clearfix">
+    @Html.ActionLink("Create New Complaint", "Create", "Complaint", null, new { @class = "btn btn-white btn-primary" })  <div class="pull-right tableTools-container"></div>
+</div>
+<div class="space-6"></div>
+<div class="table-header">
+    Results for "Latest Registered Maintanence officers"
+</div>
+<div class="table-responsive">
+    <table id="simple-table" class="table  table-bordered table-hover table-condensed">
+        <thead>
+            <tr>
+                <th class="detail-col">
+                    #ID
+                </th>
+
+                <th class="center">
+                    Category
+                </th>
+                <th>
+                    <i class="ace-icon fa fa-user"></i>
+                    UserName
+                </th>
+                <th>
+                    Comment
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Start Date
+                </th>
+                <th>
+                    Priority
+                </th>
+                <th>
+                    Location
+                </th>
+                <th>
+                    ItemName
+                </th>
+                <th>
+                    ItemID
+                </th>
+                <th>
+                    Picture
+                </th>
+                <th>
+                    IsActive
+                </th>
+                <th>
+                    Process
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.ComplaintId)
+                    </td>
+              
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.COMMENT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.STATUS)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.STARTDATE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PRIORITY)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoomNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.itemName)
+                    </td>
+                    <td>
+                        @if (@item.ITEM_ID != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.ITEM_ID)
+                        }
+                        else
+                        {
+                            <span class="label label-xlg label-light arrowed-in-right">No ID</span>
+                        }
+
+                    </td>
+                    <td>
+                        @if (@item.ImgUrl != null)
+                        {
+                            <a class="example-image-link" href="@item.ImgUrl" data-lightbox="example-2" data-title="@item.RoomNo @item.itemName">
+                                <img class="example-image" src="@item.ImgUrl" width="75" height="75" alt="image-1" />
+                            </a>
+                            @*<img src="@item.ImgUrl" alt="@item.RoomNo @item.itemName " class="example-image-link" />*@
+                        }
+                        else
+                        {
+                            <span class="label label-xlg label-light  arrowed arrowed-right">No Image</span>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsActive)
+                    </td>
+                    <td>                       
+                        <div class="hidden-sm hidden-xs action-buttons">
+                            <a class="blue" href="@Url.Action("Details","Complaint",new { id = item.ComplaintId })">
+                                <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                            </a>
+                            <a class="green" href="@Url.Action("Edit","Complaint",new {id = item.ComplaintId })">
+                                <i class="ace-icon fa fa-pencil bigger-130"></i>
+                            </a>                            
+                        </div>
+                        <div class="hidden-md hidden-lg">
+                            <div class="inline pos-rel">
+                                <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                    <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                                </button>
+
+                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                    <li>
+                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                            <span class="blue">
+                                                <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+
+                                        <a href="@Url.Action("Edit","Location",new {id = item.ComplaintId })" class="tooltip-success" data-rel="tooltip">
+                                            <span class="green">
+                                                <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                            <span class="red">
+                                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+
+    </table>
+
+</div>
+@section PagePluginScripts {
+
+    <script src="~/assets/js/lightbox.js"></script>
+
+}
+
+@section PageInlineScripts{
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $('.modal.aside').ace_aside();
+
+            $('#aside-inside-modal').addClass('aside').ace_aside({ container: '#my-modal > .modal-dialog' });
+
+            //$('#top-menu').modal('show')
+
+            $(document).one('ajaxloadstart.page', function (e) {
+                //in ajax mode, remove before leaving page
+                $('.modal.aside').remove();
+                $(window).off('.aside')
+            });
+
+
+            //make content sliders resizable using jQuery UI (you should include jquery ui files)
+            //$('#right-menu > .modal-dialog').resizable({handles: "w", grid: [ 20, 0 ], minWidth: 200, maxWidth: 600});
+        });
+    </script>
+}

@@ -1,0 +1,74 @@
+﻿@model PagedList.IPagedList<EastMed.Data.Model.departmant>
+@using PagedList.Mvc;
+
+            
+@if (Convert.ToInt32(this.Session["UserID"]) == 1000000000)
+            {
+                <p>
+                    @Html.ActionLink("Create New", "Create", "Departmants", null, new { @class = " btn btn-primary btn-sm" })
+                </p>
+
+            }
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+        <thead>
+            <tr>
+                <th>
+                    Department Name
+                </th>
+                <th>
+                    Department ID
+                </th>
+                <th>
+                    IsActive
+                </th>
+@if (Convert.ToInt32(this.Session["UserID"]) == 1000000000)
+{
+
+                <th></th>
+}
+            </tr>
+        </thead>
+        @foreach (var itemdepartment in Model)
+    {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => itemdepartment.DEPT_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => itemdepartment.DEPT_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => itemdepartment.IsActive)
+                </td>
+
+@if (Convert.ToInt32(this.Session["UserID"]) == 1000000000)
+{
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = itemdepartment.ID }) |                                        
+                    @Html.ActionLink("Delete", "Delete", new { id = itemdepartment.ID })
+              
+                </td>
+}
+            </tr>
+    }
+
+    </table>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        <div class="dataTables_info">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="dataTables_paginate pagedList pagination-sm">
+
+
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page }), PagedListRenderOptions.Classic)
+        </div>
+    </div>
+
+</div>

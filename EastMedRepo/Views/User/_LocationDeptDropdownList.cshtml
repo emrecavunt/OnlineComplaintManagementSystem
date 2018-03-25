@@ -1,0 +1,45 @@
+﻿@model EastMedRepo.Models.DepartmentAndLocationDDLVM
+@{
+    ViewBag.Title = "_LocationDeptDropdownList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+            <div class="col-md-9">
+                @if(ViewBag.DepartmentList != null)
+                    {
+
+
+                    @Html.DropDownListFor(m=>m.DepartmentID , ViewBag.DepartmentList as SelectList,"--Select Department--",new {@class ="form-control" })
+
+                }
+
+                @Html.DropDownListFor(m=>m.LocationID, new SelectList(""), "--Select Location--",new { @class="form-control"})
+
+            </div>
+
+
+
+          
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#DepartmentID").change(function () {
+                var DepartmentID = $(this).val();
+               
+                $.ajax({
+                    type: "Post",
+                    url: "User/GetLocationList?GetLocationList=" + DepartmentID,
+                    contentType:"html",
+                    success: function (response) {
+                      
+                        $("#LocationID").empty();
+                        $("#LocationID").append(response);
+                    }
+                })
+            })
+       })
+    </script>
+    }
