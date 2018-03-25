@@ -13,6 +13,8 @@ Connection to MySQL with entity framework 6.0 , mysql
 * datatables with search and export files functionality
 * Gridmvc 
 * sweetalert , bootboxjs, notifyjs included
+* Google Captcha 
+*
 
 ## Issues 
 There could be issues with session cache and other configuration types, please let me know if you faced.
