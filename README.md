@@ -1,5 +1,5 @@
 # OnlineComplaintManagementSystem
-Hello to all, I would like to share my first MVC project "Online Complaint Management System"  to you.
+Hi everyone, I would like to share my first MVC project "Online Complaint Management System"  to you.
 
 
 # Aim of Project 
